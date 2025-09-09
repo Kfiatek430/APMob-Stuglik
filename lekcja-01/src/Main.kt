@@ -10,4 +10,10 @@ fun main() {
     for (j in 5 downTo 1) {
         println("j = $j")
     }
+
+    val array = arrayOf("String", 20);
+
+    for(item in array) {
+        println(item);
+    }
 }
