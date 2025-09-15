@@ -1,6 +1,5 @@
 import kotlin.math.PI
-import kotlin.random.Random.Default.nextInt
-import kotlin.random.nextInt
+import kotlin.random.Random
 
 fun exercise01() {
     print("Podaj tekst: ")
@@ -86,29 +85,43 @@ fun exercise06() {
     val year = readln().toInt()
 
     print("Podaj płeć (M / K): ")
-    val gender = readln()
+    val gender = readln().uppercase()
 
     val correctedYear = year % 100
     val correctedMonth = if (year >= 2000) month + 20 else month
 
     val datePart = "%02d%02d%02d".format(correctedYear, correctedMonth, day)
 
-    val random: Array<Int?> = arrayOfNulls(3);
-    for (i in 0..2)
-        random[i] = nextInt(0, 9)
-
-    val randomPart = random.joinToString("")
-    println(randomPart)
-
-    var genderNumber: Int;
-    if(gender == "M") {
-        do {
-            genderNumber = nextInt(1, 9)
-        } while (genderNumber % 2 !== 0)
-    } else {
-
+    val random = arrayOfNulls<Int>(3)
+    for (i in 0..2) {
+        random[i] = Random.nextInt(0, 10)
     }
+    val randomPart = random.joinToString("")
+
+    var genderNumber: Int
+    if (gender == "M") {
+        do {
+            genderNumber = Random.nextInt(0, 10)
+        } while (genderNumber % 2 == 0)
+    } else {
+        do {
+            genderNumber = Random.nextInt(0, 10)
+        } while (genderNumber % 2 != 0)
+    }
+
+    val firstTen = datePart + randomPart + genderNumber
+
+    val weights = arrayOf(1, 3, 7, 9, 1, 3, 7, 9, 1, 3)
+    var sum = 0
+    for (i in 0..<firstTen.length) {
+        sum += (firstTen[i].toString().toInt() * weights[i])
+    }
+    val controlDigit = (10 - (sum % 10)) % 10
+
+    val pesel = firstTen + controlDigit
+    println("Wygenerowany PESEL: $pesel")
 }
+
 
 fun main() {
 //    exercise01()
