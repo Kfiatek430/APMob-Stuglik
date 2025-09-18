@@ -1,5 +1,0 @@
-123
-3.14
-true
-[1, 2, 3]
-Hello world

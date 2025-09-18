@@ -1,5 +1,0 @@
-123 to zmienna typu Int
-3.14 to zmienna typu Double
-true to zmienna typu Boolean
-[1, 2, 3] to zmienna typu Array
-Hello world to zmienna typu String

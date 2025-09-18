@@ -6,9 +6,9 @@ import kotlin.random.Random
 
 fun exercise01() {
     println("Wybierz tryb gry: 1 = skróty, 2 = pełne nazwy")
-    val tryb = readln()
+    val tryb = readln().toInt()
 
-    val choices = if (tryb == "2") listOf("kamień", "papier", "nożyce")
+    val choices = if (tryb == 2) listOf("kamień", "papier", "nożyce")
     else listOf("k", "p", "n")
 
     println("Dostępne wybory: ${choices.joinToString(", ")}")
@@ -83,6 +83,95 @@ fun exercise03(inputFile: String, outputFile: String) {
     File(outputFile).writeText(results.joinToString("\n"))
 }
 
+fun exercise04() {
+    println("Konwersje liczbowe (2-16)")
+    println("1. Dec -> X")
+    println("2. X -> Dec")
+    print("Wybierz opcję: ")
+
+    when (readln()) {
+        "1" -> {
+            print("Podaj podstawę systemu docelowego (2-16): ")
+            val base = readln().toInt()
+            print("Podaj liczbę dziesiętną: ")
+            val dec = readln().toInt()
+            println("Wynik: ${convertDecToBase(dec, base)}")
+        }
+        "2" -> {
+            print("Podaj podstawę systemu źródłowego (2-16): ")
+            val base = readln().toInt()
+            print("Podaj liczbę: ")
+            val num = readln()
+            println("Wynik: ${convertBaseToDec(num, base)}")
+        }
+        else -> println("Nieprawidłowa opcja")
+    }
+}
+
+fun convertDecToBase(value: Int, base: Int): String {
+    if (base !in 2..16) return "Podstawa musi być w zakresie 2-16"
+    if (value == 0) return "0"
+
+    val digits = "0123456789ABCDEF"
+    var num = value
+    val result = StringBuilder()
+
+    while (num > 0) {
+        result.append(digits[num % base])
+        num /= base
+    }
+
+    return result.reverse().toString()
+}
+
+fun convertBaseToDec(number: String, base: Int): Int {
+    if (base !in 2..16) return -1
+
+    val digits = "0123456789ABCDEF"
+    var result = 0
+
+    for (char in number.uppercase()) {
+        val digitValue = digits.indexOf(char)
+        if (digitValue == -1 || digitValue >= base) {
+            println("Nieprawidłowa liczba dla podstawy $base")
+            return -1
+        }
+        result = result * base + digitValue
+    }
+
+    return result
+}
+
+fun exercise05() {
+    print("Podaj tekst do zaszyfrowania: ")
+    val message = readLine() ?: ""
+    print("Podaj klucz szyfrujący (np. 42310): ")
+    val key = readLine() ?: ""
+
+    val cols = key.length
+    val order = key.map { it.toString().toInt() }
+    val rows = (message.length + cols - 1) / cols
+    val padded = message.padEnd(rows * cols, '_')
+
+    val table = List(rows) { r -> padded.substring(r * cols, r * cols + cols) }
+    val encrypted = buildString {
+        for (c in order) {
+            for (r in table) append(r[c])
+        }
+    }
+    println("Zaszyfrowane: $encrypted")
+
+    val decryptedTable = Array(rows) { CharArray(cols) }
+    var idx = 0
+    for (c in order) {
+        for (r in 0 until rows) {
+            decryptedTable[r][c] = encrypted[idx++]
+        }
+    }
+    val decrypted = decryptedTable.joinToString("") { String(it) }.replace("_", "")
+    println("Odszyfrowane: $decrypted")
+}
+
 fun exercise06() {
     print("Podaj prędkość wiatru w m/s: ")
     val speed = readln().toDouble()
@@ -149,6 +238,7 @@ fun main() {
 //    exercise01()
 //    exercise02()
 //    exercise03("dane.txt", "wynik.txt")
+//    exercise04()
 //    exercise06()
 //    exercise07()
 }
