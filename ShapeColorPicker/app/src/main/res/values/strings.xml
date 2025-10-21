@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">ShapeColorPicker</string>
+    <string name="shape">Shape</string>
+    <string name="rgb_x_y_z">RGB: 255, 255, 255</string>
+    <array name="shapes">
+        <item>circle</item>
+        <item>square</item>
+        <item>triangle</item>
+    </array>
+</resources>

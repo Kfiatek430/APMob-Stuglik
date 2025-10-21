@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/main"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:gravity="center"
+  android:orientation="vertical"
+  android:padding="10dp"
+  tools:context=".MainActivity"
+>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    android:orientation="vertical"
+  >
+    <Spinner
+      android:id="@+id/mySpinner"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1"
+      android:entries="@array/shapes"
+      android:textAlignment="center"
+      tools:ignore="NestedWeights,Suspicious0dp"
+    />
+
+    <ImageView
+      android:id="@+id/imageView"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="2"
+      android:contentDescription="@string/shape"
+      android:src="@drawable/circle"
+      tools:ignore="Suspicious0dp"
+    />
+  </LinearLayout>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    android:orientation="vertical"
+  >
+    <TextView
+      android:id="@+id/rgbText"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1"
+      android:text="@string/rgb_x_y_z"
+      tools:ignore="NestedWeights,Suspicious0dp"
+    />
+
+    <SeekBar
+      android:id="@+id/redSlider"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1"
+      android:max="255"
+      android:progress="255"
+      tools:ignore="NestedWeights,Suspicious0dp"
+    />
+
+    <SeekBar
+      android:id="@+id/greenSlider"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1"
+      android:max="255"
+      android:progress="255"
+      tools:ignore="NestedWeights,Suspicious0dp"
+    />
+
+    <SeekBar
+      android:id="@+id/blueSlider"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1"
+      android:max="255"
+      android:progress="255"
+      tools:ignore="NestedWeights,Suspicious0dp"
+    />
+  </LinearLayout>
+
+</LinearLayout>
